@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Yaren | Aşk Hikayesi</title>
+<title>Yaren</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cinzel:wght@400;600&display=swap" rel="stylesheet">
 
@@ -13,35 +13,43 @@ body{
     margin:0;
     height:100vh;
     overflow:hidden;
-    background:black;
-    cursor:pointer;
+    background: radial-gradient(circle at top,#1a0033,#000);
     font-family:Cinzel;
+    cursor:pointer;
 }
 
 /* INTRO */
 #intro{
-    position:absolute;
-    width:100%;
-    height:100%;
+    position:fixed;
+    inset:0;
     display:flex;
     justify-content:center;
     align-items:center;
     color:white;
     font-size:2rem;
     text-align:center;
-    background: radial-gradient(circle at center,#1a0033,#000);
+    transition:1s;
 }
 
-/* MAIN */
+/* MAIN (animasyon BOZULMASIN diye display:none yok!) */
 #main{
-    display:none;
-    width:100%;
-    height:100%;
+    position:fixed;
+    inset:0;
+    display:flex;
     justify-content:center;
     align-items:center;
     flex-direction:column;
+    opacity:0;
+    transform:scale(1.1);
+    transition:1.5s ease;
     text-align:center;
     color:white;
+}
+
+/* ACTIVE STATE */
+#main.show{
+    opacity:1;
+    transform:scale(1);
 }
 
 /* FOTO */
@@ -50,13 +58,7 @@ img{
     height:420px;
     object-fit:cover;
     border-radius:25px;
-    box-shadow:0 0 80px rgba(255,0,150,0.5);
-    animation:zoom 5s ease forwards;
-}
-
-@keyframes zoom{
-    from{transform:scale(1.2);}
-    to{transform:scale(1);}
+    box-shadow:0 0 60px rgba(255,0,150,0.4);
 }
 
 /* YAZI */
@@ -64,7 +66,7 @@ h1{
     font-family:"Great Vibes";
     font-size:4.5rem;
     color:#ffb3e6;
-    margin-top:20px;
+    margin-top:15px;
 }
 
 p{
@@ -122,13 +124,14 @@ document.body.addEventListener("click", async () => {
 
     setTimeout(()=>{
         intro.style.display = "none";
-        main.style.display = "flex";
+        main.classList.add("show"); // 🔥 animasyon FIX
     },800);
 
+    // 🔥 MÜZİK EN GÜÇLÜ FIX
     try {
+        music.currentTime = 0;
         music.load();
         await music.play();
-        console.log("müzik çalıştı");
     } catch (e) {
         console.log("müzik engellendi", e);
     }
@@ -137,10 +140,10 @@ document.body.addEventListener("click", async () => {
 
 }, {once:true});
 
-/* ❤️ KALPLER */
+/* ❤️ KALPLER (GARANTİ) */
 function startHearts(){
     setInterval(()=>{
-        let h = document.createElement("div");
+        let h=document.createElement("div");
         h.className="heart";
         h.innerHTML="❤";
         h.style.left=Math.random()*100+"vw";
