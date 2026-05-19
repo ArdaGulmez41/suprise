@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Yaren</title>
+<title>Yaren | A Love Story</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cinzel:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Great+Vibes&display=swap" rel="stylesheet">
 
 <style>
 
@@ -14,12 +14,11 @@ body{
     margin:0;
     height:100vh;
     overflow:hidden;
-    background: radial-gradient(circle at top,#1b0033,#000);
+    background:black;
     cursor:pointer;
-    font-family:Cinzel;
 }
 
-/* INTRO */
+/* NETFLIX INTRO SCREEN */
 #intro{
     position:absolute;
     width:100%;
@@ -28,47 +27,88 @@ body{
     justify-content:center;
     align-items:center;
     color:white;
-    font-size:2rem;
+    font-size:2.2rem;
+    font-family:Cinzel;
+    letter-spacing:3px;
     text-align:center;
-    transition:1s;
+    background: radial-gradient(circle at center,#1a0033,#000);
+    transition:1.5s;
 }
 
-/* MAIN */
-#main{
+/* MAIN SCENE */
+#scene{
     display:none;
     width:100%;
     height:100%;
-    flex-direction:column;
+    position:relative;
     justify-content:center;
     align-items:center;
-    color:white;
     text-align:center;
+    color:white;
 }
 
-/* IMAGE */
-img{
-    width:280px;
-    height:380px;
-    object-fit:cover;
-    border-radius:20px;
-    box-shadow:0 0 50px rgba(255,0,150,0.4);
+/* DARK CINEMA OVERLAY */
+#overlay{
+    position:absolute;
+    width:100%;
+    height:100%;
+    background: radial-gradient(circle at center, transparent 20%, black 100%);
     z-index:2;
+}
+
+/* PHOTO */
+img{
+    width:320px;
+    height:420px;
+    object-fit:cover;
+    border-radius:25px;
+    box-shadow:0 0 80px rgba(255,0,150,0.4);
+    transform:scale(1.1);
+    animation:zoom 6s ease forwards;
+    z-index:1;
+}
+
+@keyframes zoom{
+    from{transform:scale(1.2);}
+    to{transform:scale(1);}
 }
 
 /* NAME */
 h1{
+    position:absolute;
+    bottom:120px;
+    width:100%;
     font-family:"Great Vibes";
-    font-size:4rem;
+    font-size:4.5rem;
     color:#ffb3e6;
-    margin-top:20px;
+    text-shadow:0 0 20px rgba(255,0,120,0.5);
+    z-index:3;
+}
+
+/* STORY TEXT */
+p{
+    position:absolute;
+    bottom:60px;
+    width:80%;
+    left:10%;
+    font-size:1.1rem;
+    color:#f5d6e6;
+    opacity:0;
+    animation:fadeText 4s ease forwards 2s;
+    z-index:3;
+}
+
+@keyframes fadeText{
+    to{opacity:1;}
 }
 
 /* HEARTS */
 .heart{
     position:absolute;
     color:pink;
-    font-size:20px;
+    font-size:18px;
     animation:float 6s linear forwards;
+    z-index:0;
 }
 
 @keyframes float{
@@ -76,32 +116,30 @@ h1{
     100%{transform:translateY(-100vh); opacity:0;}
 }
 
-/* PARTICLES */
-.particle{
-    position:absolute;
-    width:6px;
-    height:6px;
-    background:white;
-    border-radius:50%;
-    box-shadow:0 0 10px white;
-    animation:up 5s linear forwards;
-}
-
-@keyframes up{
-    to{transform:translateY(-100vh); opacity:0;}
-}
-
 </style>
 </head>
 
 <body>
 
-<div id="intro">Ekrana dokun ❤️</div>
+<!-- INTRO -->
+<div id="intro">
+    Bir aşk hikayesi başlıyor...
+</div>
 
-<div id="main">
+<!-- SCENE -->
+<div id="scene">
+
+    <div id="overlay"></div>
 
     <img src="fotograf.jpg">
+
     <h1>Yaren</h1>
+
+    <p>
+        Bu bir tesadüf değildi...  
+        Seninle aynı hikayeye yazılmak kaderdi.  
+        Ve ben o hikayede seni seçtim.
+    </p>
 
     <audio id="music" loop>
         <source src="music.mp3" type="audio/mpeg">
@@ -112,49 +150,42 @@ h1{
 <script>
 
 const intro = document.getElementById("intro");
-const main = document.getElementById("main");
+const scene = document.getElementById("scene");
 const music = document.getElementById("music");
 
 document.body.addEventListener("click", () => {
 
     intro.style.opacity = 0;
-    intro.style.transform = "scale(1.2)";
 
     setTimeout(()=>{
         intro.style.display = "none";
-        main.style.display = "flex";
-    },800);
+        scene.style.display = "flex";
+    },1000);
 
-    // MÜZİK (KESİN ÇALIŞAN)
-    music.play().catch(()=>{});
+    // 🎵 GARANTİ MÜZİK START
+    const playPromise = music.play();
 
-    startEffects();
+    if(playPromise !== undefined){
+        playPromise.catch(()=> {
+            console.log("Müzik engellendi");
+        });
+    }
+
+    startHearts();
 
 }, {once:true});
 
-/* ❤️ KALPLER */
-function startEffects(){
-
+/* ❤️ HEARTS */
+function startHearts(){
     setInterval(()=>{
-        let h = document.createElement("div");
+        let h=document.createElement("div");
         h.className="heart";
         h.innerHTML="❤";
-        h.style.left = Math.random()*100 + "vw";
-        h.style.fontSize = (10+Math.random()*20)+"px";
+        h.style.left=Math.random()*100+"vw";
+        h.style.fontSize=(10+Math.random()*20)+"px";
         document.body.appendChild(h);
-
         setTimeout(()=>h.remove(),6000);
     },200);
-
-/* ✨ PARTİKÜL */
-    setInterval(()=>{
-        let p = document.createElement("div");
-        p.className="particle";
-        p.style.left = Math.random()*100 + "vw";
-        document.body.appendChild(p);
-
-        setTimeout(()=>p.remove(),5000);
-    },120);
 }
 
 </script>
