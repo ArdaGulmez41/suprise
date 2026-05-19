@@ -3,10 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yaren | Aşk Hikayesi</title>
 
-<title>Yaren | A Love Story</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Great+Vibes&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cinzel:wght@400;600&display=swap" rel="stylesheet">
 
 <style>
 
@@ -16,9 +15,10 @@ body{
     overflow:hidden;
     background:black;
     cursor:pointer;
+    font-family:Cinzel;
 }
 
-/* NETFLIX INTRO SCREEN */
+/* INTRO */
 #intro{
     position:absolute;
     width:100%;
@@ -27,45 +27,31 @@ body{
     justify-content:center;
     align-items:center;
     color:white;
-    font-size:2.2rem;
-    font-family:Cinzel;
-    letter-spacing:3px;
+    font-size:2rem;
     text-align:center;
     background: radial-gradient(circle at center,#1a0033,#000);
-    transition:1.5s;
 }
 
-/* MAIN SCENE */
-#scene{
+/* MAIN */
+#main{
     display:none;
     width:100%;
     height:100%;
-    position:relative;
     justify-content:center;
     align-items:center;
+    flex-direction:column;
     text-align:center;
     color:white;
 }
 
-/* DARK CINEMA OVERLAY */
-#overlay{
-    position:absolute;
-    width:100%;
-    height:100%;
-    background: radial-gradient(circle at center, transparent 20%, black 100%);
-    z-index:2;
-}
-
-/* PHOTO */
+/* FOTO */
 img{
-    width:320px;
+    width:300px;
     height:420px;
     object-fit:cover;
     border-radius:25px;
-    box-shadow:0 0 80px rgba(255,0,150,0.4);
-    transform:scale(1.1);
-    animation:zoom 6s ease forwards;
-    z-index:1;
+    box-shadow:0 0 80px rgba(255,0,150,0.5);
+    animation:zoom 5s ease forwards;
 }
 
 @keyframes zoom{
@@ -73,47 +59,30 @@ img{
     to{transform:scale(1);}
 }
 
-/* NAME */
+/* YAZI */
 h1{
-    position:absolute;
-    bottom:120px;
-    width:100%;
     font-family:"Great Vibes";
     font-size:4.5rem;
     color:#ffb3e6;
-    text-shadow:0 0 20px rgba(255,0,120,0.5);
-    z-index:3;
+    margin-top:20px;
 }
 
-/* STORY TEXT */
 p{
-    position:absolute;
-    bottom:60px;
-    width:80%;
-    left:10%;
-    font-size:1.1rem;
-    color:#f5d6e6;
-    opacity:0;
-    animation:fadeText 4s ease forwards 2s;
-    z-index:3;
+    max-width:500px;
+    color:#f6d6e6;
+    line-height:1.6;
 }
 
-@keyframes fadeText{
-    to{opacity:1;}
-}
-
-/* HEARTS */
+/* HEART */
 .heart{
     position:absolute;
     color:pink;
-    font-size:18px;
     animation:float 6s linear forwards;
-    z-index:0;
 }
 
 @keyframes float{
-    0%{transform:translateY(0); opacity:1;}
-    100%{transform:translateY(-100vh); opacity:0;}
+    0%{transform:translateY(0);opacity:1;}
+    100%{transform:translateY(-100vh);opacity:0;}
 }
 
 </style>
@@ -121,27 +90,21 @@ p{
 
 <body>
 
-<!-- INTRO -->
-<div id="intro">
-    Bir aşk hikayesi başlıyor...
-</div>
+<div id="intro">Bir aşk hikayesi başlıyor...</div>
 
-<!-- SCENE -->
-<div id="scene">
-
-    <div id="overlay"></div>
+<div id="main">
 
     <img src="fotograf.jpg">
 
     <h1>Yaren</h1>
 
     <p>
-        Bu bir tesadüf değildi...  
-        Seninle aynı hikayeye yazılmak kaderdi.  
-        Ve ben o hikayede seni seçtim.
+        Seni tanıdığım andan beri hayatım değişti.  
+        Sen benim en güzel tesadüfümsün.  
+        İyi ki varsın ❤️
     </p>
 
-    <audio id="music" loop>
+    <audio id="music" loop preload="auto">
         <source src="music.mp3" type="audio/mpeg">
     </audio>
 
@@ -150,35 +113,34 @@ p{
 <script>
 
 const intro = document.getElementById("intro");
-const scene = document.getElementById("scene");
+const main = document.getElementById("main");
 const music = document.getElementById("music");
 
-document.body.addEventListener("click", () => {
+document.body.addEventListener("click", async () => {
 
     intro.style.opacity = 0;
 
     setTimeout(()=>{
         intro.style.display = "none";
-        scene.style.display = "flex";
-    },1000);
+        main.style.display = "flex";
+    },800);
 
-    // 🎵 GARANTİ MÜZİK START
-    const playPromise = music.play();
-
-    if(playPromise !== undefined){
-        playPromise.catch(()=> {
-            console.log("Müzik engellendi");
-        });
+    try {
+        music.load();
+        await music.play();
+        console.log("müzik çalıştı");
+    } catch (e) {
+        console.log("müzik engellendi", e);
     }
 
     startHearts();
 
 }, {once:true});
 
-/* ❤️ HEARTS */
+/* ❤️ KALPLER */
 function startHearts(){
     setInterval(()=>{
-        let h=document.createElement("div");
+        let h = document.createElement("div");
         h.className="heart";
         h.innerHTML="❤";
         h.style.left=Math.random()*100+"vw";
