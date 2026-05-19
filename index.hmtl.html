@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Yaren'e Bir Sürpriz</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Montserrat:wght@300;400&family=Great+Vibes&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    width:100%;
+    height:100vh;
+    overflow:hidden;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    font-family:'Montserrat',sans-serif;
+
+    background:
+    radial-gradient(circle at top left, rgba(120,40,200,0.35), transparent 30%),
+    radial-gradient(circle at bottom right, rgba(0,120,255,0.25), transparent 30%),
+    linear-gradient(135deg,#050816,#120a2a,#1b1035);
+
+    background-size:400% 400%;
+    animation:bgMove 14s ease infinite;
+
+    cursor:pointer;
+}
+
+@keyframes bgMove{
+    0%{background-position:0% 50%;}
+    50%{background-position:100% 50%;}
+    100%{background-position:0% 50%;}
+}
+
+/* Açılış Yazısı */
+
+#intro{
+    position:absolute;
+    color:white;
+    font-size:3rem;
+    text-align:center;
+    letter-spacing:4px;
+    font-family:'Cinzel',serif;
+
+    animation:pulse 3s infinite;
+    transition:1s ease;
+
+    z-index:100;
+}
+
+@keyframes pulse{
+    0%,100%{
+        transform:scale(1);
+        opacity:0.8;
+    }
+
+    50%{
+        transform:scale(1.08);
+        opacity:1;
+    }
+}
+
+/* Ana Kart */
+
+#card{
+    width:85%;
+    max-width:1100px;
+
+    padding:40px;
+
+    border-radius:35px;
+
+    background:rgba(255,255,255,0.08);
+
+    backdrop-filter:blur(18px);
+    -webkit-backdrop-filter:blur(18px);
+
+    border:1px solid rgba(255,255,255,0.15);
+
+    box-shadow:
+    0 10px 40px rgba(0,0,0,0.5),
+    inset 0 1px 1px rgba(255,255,255,0.1);
+
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+
+    opacity:0;
+    transform:translateY(80px) scale(0.9);
+
+    transition:1.7s cubic-bezier(.17,.84,.44,1);
+
+    position:relative;
+}
+
+#card.show{
+    opacity:1;
+    transform:translateY(0) scale(1);
+}
+
+/* Görsel */
+
+.image-box{
+    width:340px;
+    height:430px;
+
+    border-radius:30px;
+
+    overflow:hidden;
+
+    border:1px solid rgba(255,255,255,0.25);
+
+    box-shadow:
+    0 10px 40px rgba(0,0,0,0.6),
+    0 0 30px rgba(255,192,203,0.2);
+
+    transform:scale(0.8);
+    opacity:0;
+
+    transition:1.5s ease 0.5s;
+}
+
+#card.show .image-box{
+    transform:scale(1);
+    opacity:1;
+}
+
+.image-box img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+/* Yazılar */
+
+.side-text{
+    position:absolute;
+    top:50%;
+    transform:translateY(-50%);
+
+    width:240px;
+
+    color:#f3d8b6;
+
+    font-size:2.3rem;
+
+    font-family:'Great Vibes',cursive;
+
+    text-shadow:0 0 15px rgba(0,0,0,0.7);
+
+    opacity:0;
+
+    transition:1.5s ease 1.2s;
+}
+
+.left{
+    left:40px;
+    transform:translateX(-40px);
+}
+
+.right{
+    right:40px;
+    transform:translateX(40px);
+}
+
+#card.show .left,
+#card.show .right{
+    opacity:1;
+    transform:translateX(0);
+}
+
+/* Ana Yazı */
+
+.main-text{
+    margin-top:35px;
+
+    text-align:center;
+
+    opacity:0;
+    transform:translateY(30px);
+
+    transition:1.5s ease 1.8s;
+}
+
+#card.show .main-text{
+    opacity:1;
+    transform:translateY(0);
+}
+
+.main-text h1{
+    font-family:'Cinzel',serif;
+
+    font-size:4.5rem;
+    font-weight:600;
+
+    letter-spacing:5px;
+
+    margin-bottom:15px;
+
+    background:linear-gradient(90deg,#f6d365,#fda085,#f6d365);
+
+    background-size:200%;
+
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+
+    animation:goldFlow 6s linear infinite;
+}
+
+@keyframes goldFlow{
+    0%{background-position:0%;}
+    100%{background-position:200%;}
+}
+
+.main-text p{
+    color:white;
+    font-size:1.3rem;
+    letter-spacing:2px;
+    opacity:0.85;
+}
+
+/* Parçacıklar */
+
+.sparkle{
+    position:absolute;
+
+    width:4px;
+    height:4px;
+
+    border-radius:50%;
+
+    background:white;
+
+    box-shadow:0 0 10px white;
+
+    animation:floatUp linear forwards;
+}
+
+@keyframes floatUp{
+
+    0%{
+        transform:translateY(0) scale(0);
+        opacity:0;
+    }
+
+    20%{
+        opacity:1;
+    }
+
+    100%{
+        transform:translateY(-100vh) scale(1.8);
+        opacity:0;
+    }
+}
+
+/* Hover */
+
+#card:hover{
+    transform:scale(1.02);
+}
+
+/* Mobil */
+
+@media(max-width:950px){
+
+    body{
+        padding:20px;
+    }
+
+    #intro{
+        font-size:2rem;
+        width:90%;
+    }
+
+    #card{
+        width:100%;
+        padding:25px;
+    }
+
+    .image-box{
+        width:250px;
+        height:330px;
+    }
+
+    .side-text{
+        position:relative;
+        width:100%;
+        top:auto;
+        left:auto;
+        right:auto;
+
+        transform:none;
+
+        text-align:center;
+
+        margin-bottom:20px;
+    }
+
+    .main-text h1{
+        font-size:2.8rem;
+    }
+
+    .main-text p{
+        font-size:1rem;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- Müzik -->
+<audio id="music" loop>
+    <source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<!-- Açılış -->
+<div id="intro">
+    Ekrana dokun ve sadece birkaç saniye bekle...
+</div>
+
+<!-- Ana Kart -->
+<div id="card">
+
+    <div class="side-text left">
+        Gözlerin bana huzurun ne olduğunu öğretti...
+    </div>
+
+    <div class="side-text right">
+        Sen benim en güzel tesadüfümsün...
+    </div>
+
+    <!-- Görsel -->
+    <div class="image-box">
+
+        <img src="https://images.unsplash.com/photo-1526047932273-341f2a7631f9?q=80&w=1200&auto=format&fit=crop">
+
+    </div>
+
+    <!-- Ana Yazı -->
+    <div class="main-text">
+
+        <h1>YAREN</h1>
+
+        <p>
+            Benim en güzel hikâyem...
+        </p>
+
+    </div>
+
+</div>
+
+<script>
+
+const intro = document.getElementById("intro");
+const card = document.getElementById("card");
+const music = document.getElementById("music");
+
+document.body.addEventListener("click", () => {
+
+    intro.style.opacity = "0";
+    intro.style.transform = "scale(1.4)";
+
+    music.play();
+
+    setTimeout(() => {
+
+        intro.style.display = "none";
+
+        card.classList.add("show");
+
+        createSparkles();
+
+    }, 1000);
+
+}, {once:true});
+
+/* Parçacık efekti */
+
+function createSparkles(){
+
+    setInterval(() => {
+
+        let sparkle = document.createElement("div");
+
+        sparkle.classList.add("sparkle");
+
+        sparkle.style.left = Math.random() * 100 + "vw";
+
+        sparkle.style.bottom = "-20px";
+
+        let size = Math.random() * 5 + 2;
+
+        sparkle.style.width = size + "px";
+        sparkle.style.height = size + "px";
+
+        sparkle.style.animationDuration =
+        (Math.random() * 4 + 4) + "s";
+
+        document.body.appendChild(sparkle);
+
+        setTimeout(() => {
+            sparkle.remove();
+        },8000);
+
+    },300);
+}
+
+</script>
+
+</body>
+</html>
