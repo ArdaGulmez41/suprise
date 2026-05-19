@@ -4,316 +4,94 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Yaren'e Bir Sürpriz</title>
+<title>Yaren'e Sürpriz</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Montserrat:wght@300;400&family=Great+Vibes&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Great+Vibes&display=swap" rel="stylesheet">
 
 <style>
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
-
 body{
-    width:100%;
-    height:100vh;
+    margin:0;
     overflow:hidden;
-
-    display:flex;
-    justify-content:center;
-    align-items:center;
-
-    font-family:'Montserrat',sans-serif;
-
-    background:
-    radial-gradient(circle at top left, rgba(120,40,200,0.35), transparent 30%),
-    radial-gradient(circle at bottom right, rgba(0,120,255,0.25), transparent 30%),
-    linear-gradient(135deg,#050816,#120a2a,#1b1035);
-
-    background-size:400% 400%;
-    animation:bgMove 14s ease infinite;
-
+    height:100vh;
+    background: radial-gradient(circle at top,#1a0025,#000);
     cursor:pointer;
 }
 
-@keyframes bgMove{
-    0%{background-position:0% 50%;}
-    50%{background-position:100% 50%;}
-    100%{background-position:0% 50%;}
-}
-
-/* Açılış */
-
+/* GİRİŞ */
 #intro{
     position:absolute;
-    color:white;
-    font-size:3rem;
-    text-align:center;
-    letter-spacing:4px;
-    font-family:'Cinzel',serif;
-
-    animation:pulse 3s infinite;
-    transition:1s ease;
-
-    z-index:100;
-}
-
-@keyframes pulse{
-    0%,100%{
-        transform:scale(1);
-        opacity:0.8;
-    }
-
-    50%{
-        transform:scale(1.08);
-        opacity:1;
-    }
-}
-
-/* Ana Kart */
-
-#card{
-    width:85%;
-    max-width:1100px;
-
-    padding:40px;
-
-    border-radius:35px;
-
-    background:rgba(255,255,255,0.08);
-
-    backdrop-filter:blur(18px);
-    -webkit-backdrop-filter:blur(18px);
-
-    border:1px solid rgba(255,255,255,0.15);
-
-    box-shadow:
-    0 10px 40px rgba(0,0,0,0.5),
-    inset 0 1px 1px rgba(255,255,255,0.1);
-
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-
-    opacity:0;
-    transform:translateY(80px) scale(0.9);
-
-    transition:1.7s cubic-bezier(.17,.84,.44,1);
-
-    position:relative;
-}
-
-#card.show{
-    opacity:1;
-    transform:translateY(0) scale(1);
-}
-
-/* Fotoğraf */
-
-.image-box{
-    width:340px;
-    height:430px;
-
-    border-radius:30px;
-
-    overflow:hidden;
-
-    border:1px solid rgba(255,255,255,0.25);
-
-    box-shadow:
-    0 10px 40px rgba(0,0,0,0.6),
-    0 0 30px rgba(255,192,203,0.2);
-
-    transform:scale(0.8);
-    opacity:0;
-
-    transition:1.5s ease 0.5s;
-}
-
-#card.show .image-box{
-    transform:scale(1);
-    opacity:1;
-}
-
-.image-box img{
     width:100%;
     height:100%;
-    object-fit:cover;
-}
-
-/* Yan Yazılar */
-
-.side-text{
-    position:absolute;
-    top:50%;
-
-    width:240px;
-
-    color:#f3d8b6;
-
-    font-size:2.3rem;
-
-    font-family:'Great Vibes',cursive;
-
-    text-shadow:0 0 15px rgba(0,0,0,0.7);
-
-    opacity:0;
-
-    transition:1.5s ease 1.2s;
-}
-
-.left{
-    left:40px;
-    transform:translateX(-40px);
-}
-
-.right{
-    right:40px;
-    transform:translateX(40px);
-}
-
-#card.show .left,
-#card.show .right{
-    opacity:1;
-    transform:translateX(0);
-}
-
-/* Ana Yazı */
-
-.main-text{
-    margin-top:35px;
-
-    text-align:center;
-
-    opacity:0;
-    transform:translateY(30px);
-
-    transition:1.5s ease 1.8s;
-}
-
-#card.show .main-text{
-    opacity:1;
-    transform:translateY(0);
-}
-
-.main-text h1{
-    font-family:'Cinzel',serif;
-
-    font-size:4.5rem;
-    font-weight:600;
-
-    letter-spacing:5px;
-
-    margin-bottom:15px;
-
-    background:linear-gradient(90deg,#f6d365,#fda085,#f6d365);
-
-    background-size:200%;
-
-    -webkit-background-clip:text;
-    -webkit-text-fill-color:transparent;
-
-    animation:goldFlow 6s linear infinite;
-}
-
-@keyframes goldFlow{
-    0%{background-position:0%;}
-    100%{background-position:200%;}
-}
-
-.main-text p{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:2rem;
     color:white;
-    font-size:1.3rem;
-    letter-spacing:2px;
-    opacity:0.85;
+    font-family:Cinzel;
+    z-index:10;
 }
 
-/* Partiküller */
-
-.sparkle{
+/* KART */
+#card{
     position:absolute;
-
-    width:4px;
-    height:4px;
-
-    border-radius:50%;
-
-    background:white;
-
-    box-shadow:0 0 10px white;
-
-    animation:floatUp linear forwards;
+    width:100%;
+    height:100%;
+    display:none;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    color:white;
+    text-align:center;
 }
 
-@keyframes floatUp{
-
-    0%{
-        transform:translateY(0) scale(0);
-        opacity:0;
-    }
-
-    20%{
-        opacity:1;
-    }
-
-    100%{
-        transform:translateY(-100vh) scale(1.8);
-        opacity:0;
-    }
+/* FOTO */
+img{
+    width:280px;
+    height:380px;
+    object-fit:cover;
+    border-radius:20px;
+    box-shadow:0 0 40px rgba(255,0,150,0.5);
 }
 
-/* Hover */
-
-#card:hover{
-    transform:scale(1.02);
+/* YAZI */
+h1{
+    font-family:"Great Vibes";
+    font-size:4rem;
+    color:#ffb3d9;
+    margin-top:20px;
 }
 
-/* Mobil */
+/* KALPLER */
+.heart{
+    position:absolute;
+    color:pink;
+    font-size:20px;
+    animation: float 6s linear forwards;
+}
 
-@media(max-width:950px){
+@keyframes float{
+    0%{transform:translateY(0) scale(1); opacity:1;}
+    100%{transform:translateY(-100vh) scale(2); opacity:0;}
+}
 
-    body{
-        padding:20px;
-    }
+/* CONFETTI */
+.confetti{
+    position:absolute;
+    width:8px;
+    height:8px;
+    animation: fall 3s linear forwards;
+}
 
-    #intro{
-        font-size:2rem;
-        width:90%;
-    }
+@keyframes fall{
+    to{transform:translateY(100vh) rotate(360deg); opacity:0;}
+}
 
-    #card{
-        width:100%;
-        padding:25px;
-    }
-
-    .image-box{
-        width:250px;
-        height:330px;
-    }
-
-    .side-text{
-        position:relative;
-        width:100%;
-        top:auto;
-        left:auto;
-        right:auto;
-
-        transform:none;
-
-        text-align:center;
-
-        margin-bottom:20px;
-    }
-
-    .main-text h1{
-        font-size:2.8rem;
-    }
-
-    .main-text p{
-        font-size:1rem;
-    }
+/* LAZER CANVAS */
+canvas{
+    position:absolute;
+    top:0;
+    left:0;
 }
 
 </style>
@@ -321,50 +99,17 @@ body{
 
 <body>
 
-<!-- Müzik -->
-
-<audio id="music" loop>
-    <source src="music.mp3" type="audio/mpeg">
-</audio>
-
-<!-- Açılış -->
-
-<div id="intro">
-    Ekrana dokun...
-</div>
-
-<!-- Ana Kart -->
+<div id="intro">Ekrana dokun...</div>
 
 <div id="card">
+    <canvas id="canvas"></canvas>
 
-    <div class="side-text left">
-        Sen benim en güzel tesadüfümsün...
-    </div>
+    <img src="fotoğraf.jpg">
+    <h1>Yaren ❤️</h1>
 
-    <div class="side-text right">
-        Gözlerin bana huzurun ne olduğunu öğretti...
-    </div>
-
-    <!-- FOTOĞRAF -->
-
-    <div class="image-box">
-
-        <img src="fotograf.jpg">
-
-    </div>
-
-    <!-- Yazı -->
-
-    <div class="main-text">
-
-        <h1>YAREN</h1>
-
-        <p>
-            Benim en güzel hikâyem sensin güzelim...
-        </p>
-
-    </div>
-
+    <audio id="music" loop>
+        <source src="music.mp3" type="audio/mpeg">
+    </audio>
 </div>
 
 <script>
@@ -372,55 +117,86 @@ body{
 const intro = document.getElementById("intro");
 const card = document.getElementById("card");
 const music = document.getElementById("music");
+const canvas = document.getElementById("canvas");
+const ctx = canvas.getContext("2d");
+
+canvas.width = innerWidth;
+canvas.height = innerHeight;
 
 document.body.addEventListener("click", () => {
 
-    intro.style.opacity = "0";
-    intro.style.transform = "scale(1.4)";
+    intro.style.display = "none";
+    card.style.display = "flex";
 
-    music.play();
+    music.play().catch(()=>{});
 
-    setTimeout(() => {
+    hearts();
+    confetti();
+    fireworks();
+    drawHeart();
 
-        intro.style.display = "none";
+});
 
-        card.classList.add("show");
+/* 💖 UÇAN KALPLER */
+function hearts(){
+    setInterval(()=>{
+        let h = document.createElement("div");
+        h.className="heart";
+        h.innerHTML="❤";
+        h.style.left=Math.random()*100+"vw";
+        h.style.fontSize=(10+Math.random()*20)+"px";
+        document.body.appendChild(h);
 
-        createSparkles();
+        setTimeout(()=>h.remove(),6000);
+    },200);
+}
 
-    }, 1000);
+/* 🎉 CONFETTI */
+function confetti(){
+    setInterval(()=>{
+        let c = document.createElement("div");
+        c.className="confetti";
+        c.style.left=Math.random()*100+"vw";
+        c.style.background=`hsl(${Math.random()*360},100%,60%)`;
+        document.body.appendChild(c);
 
-}, {once:true});
+        setTimeout(()=>c.remove(),3000);
+    },80);
+}
 
-/* Partiküller */
+/* 🎆 HAVAİ FİŞEK */
+function fireworks(){
+    setInterval(()=>{
+        for(let i=0;i<20;i++){
+            let f = document.createElement("div");
+            f.className="heart";
+            f.innerHTML="✨";
+            f.style.left="50vw";
+            f.style.top="50vh";
+            document.body.appendChild(f);
 
-function createSparkles(){
+            setTimeout(()=>f.remove(),1500);
+        }
+    },2000);
+}
 
-    setInterval(() => {
+/* 💘 LAZER KALP */
+function drawHeart(){
+    let t = 0;
 
-        let sparkle = document.createElement("div");
+    function animate(){
+        requestAnimationFrame(animate);
 
-        sparkle.classList.add("sparkle");
+        let x = 16 * Math.pow(Math.sin(t),3);
+        let y = 13*Math.cos(t)-5*Math.cos(2*t)-2*Math.cos(3*t)-Math.cos(4*t);
 
-        sparkle.style.left = Math.random() * 100 + "vw";
+        ctx.fillStyle="rgba(255,0,100,0.5)";
+        ctx.fillRect(canvas.width/2 + x*10, canvas.height/2 - y*10, 2,2);
 
-        sparkle.style.bottom = "-20px";
+        t += 0.05;
+    }
 
-        let size = Math.random() * 5 + 2;
-
-        sparkle.style.width = size + "px";
-        sparkle.style.height = size + "px";
-
-        sparkle.style.animationDuration =
-        (Math.random() * 4 + 4) + "s";
-
-        document.body.appendChild(sparkle);
-
-        setTimeout(() => {
-            sparkle.remove();
-        },8000);
-
-    },300);
+    animate();
 }
 
 </script>
