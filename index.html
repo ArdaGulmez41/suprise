@@ -44,7 +44,7 @@ body{
     100%{background-position:0% 50%;}
 }
 
-/* Açılış Yazısı */
+/* Açılış */
 
 #intro{
     position:absolute;
@@ -110,7 +110,7 @@ body{
     transform:translateY(0) scale(1);
 }
 
-/* Görsel */
+/* Fotoğraf */
 
 .image-box{
     width:340px;
@@ -143,12 +143,11 @@ body{
     object-fit:cover;
 }
 
-/* Yazılar */
+/* Yan Yazılar */
 
 .side-text{
     position:absolute;
     top:50%;
-    transform:translateY(-50%);
 
     width:240px;
 
@@ -231,7 +230,7 @@ body{
     opacity:0.85;
 }
 
-/* Parçacıklar */
+/* Partiküller */
 
 .sparkle{
     position:absolute;
@@ -323,34 +322,39 @@ body{
 <body>
 
 <!-- Müzik -->
+
 <audio id="music" loop>
-    <source src="music.mp3" type="audio/mpeg">
+    <source src="KARAF - Aşk Durdukça [fQYu54iR_t8].mp3" type="audio/mpeg">
 </audio>
 
 <!-- Açılış -->
+
 <div id="intro">
-    Ekrana dokun ve sadece birkaç saniye bekle...
+    Ekrana dokun...
 </div>
 
 <!-- Ana Kart -->
+
 <div id="card">
 
     <div class="side-text left">
-        Gözlerin bana huzurun ne olduğunu öğretti...
-    </div>
-
-    <div class="side-text right">
         Sen benim en güzel tesadüfümsün...
     </div>
 
-    <!-- Görsel -->
+    <div class="side-text right">
+        Gözlerin bana huzurun ne olduğunu öğretti...
+    </div>
+
+    <!-- FOTOĞRAF -->
+
     <div class="image-box">
 
-        <img src="https://images.unsplash.com/photo-1526047932273-341f2a7631f9?q=80&w=1200&auto=format&fit=crop">
+        <img src="fotoğraf.jpg">
 
     </div>
 
-    <!-- Ana Yazı -->
+    <!-- Yazı -->
+
     <div class="main-text">
 
         <h1>YAREN</h1>
@@ -388,7 +392,7 @@ document.body.addEventListener("click", () => {
 
 }, {once:true});
 
-/* Parçacık efekti */
+/* Partiküller */
 
 function createSparkles(){
 
